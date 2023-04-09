@@ -34,7 +34,15 @@ class Config:
 
     @property
     def currency(self):
-        return self._conf.get('base', 'currency', fallback='BTC')
+        return self._conf.get('base', 'currency', fallback='DAG')
+
+    @property
+    def currency(self):
+        return self._conf.get('base', 'currency_id', fallback='constellation-labs')
+
+    @property
+    def currency(self):
+        return self._conf.get('base', 'vs_currency', fallback='usd')        
 
     @staticmethod
     def _load_screens(file_name):
