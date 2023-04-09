@@ -57,7 +57,7 @@ Bitcoin (or any other currency) stock price for your RPi Zero
     ```
 4. Download Zero BTC Screen
     ```
-    git clone https://github.com/dr-mod/zero-btc-screen.git ~/zero-btc-screen
+    git clone https://github.com/StephenR19/zero-btc-screen.git ~/zero-btc-screen
     ```
 5. Run it
     ```
