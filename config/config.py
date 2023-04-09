@@ -42,7 +42,11 @@ class Config:
 
     @property
     def vs_currency(self):
-        return self._conf.get('base', 'vs_currency', fallback='usd')        
+        return self._conf.get('base', 'vs_currency', fallback='usd')
+
+    @property
+    def graph_days(self):
+        return self._conf.get('base', 'graph_days', fallback='1')          
 
     @staticmethod
     def _load_screens(file_name):
