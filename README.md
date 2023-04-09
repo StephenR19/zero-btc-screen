@@ -1,10 +1,14 @@
+# --Forked Version Changes--
+
 All credits go to dr-mod/zero-btc-screen
 
-This version uses coingecko api specifically /coins/{id}/ohlc - set to Constellation DAG
+This version uses CoinGecko api specifically /coins/{id}/ohlc - set to Constellation DAG
 
-To configure change currency_id(constellation-labs), vs_currency(usd) and days(1) in configuration.cgf
+To configure change currency_id(constellation-labs*), vs_currency(usd*) and days(1*) in configuration.cfg
 
-Find coingecko coin ids here https://www.coingecko.com/en/api/documentation at /coins/list
+Find CoinGecko api info here https://www.coingecko.com/en/api/documentation with currency_id at /coins/list and vs_currency at /simple/supported_vs_currencies
+
+\* Current values
 
 # Zero BTC Screen
 
