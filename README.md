@@ -1,6 +1,9 @@
-All credits go to dr-mod/zero-btc-screen 
+All credits go to dr-mod/zero-btc-screen
+
 This version uses coingecko api - set to Constellation DAG
+
 To configure change currency_id in configuration.cgf
+
 Find coingecko coin ids here https://www.coingecko.com/en/api/documentation at /coins/list
 
 # Zero BTC Screen
@@ -54,7 +57,7 @@ Bitcoin (or any other currency) stock price for your RPi Zero
     ```
 4. Download Zero BTC Screen
     ```
-    git clone https://github.com/dr-mod/zero-btc-screen.git ~/zero-btc-screen
+    git clone https://github.com/StephenR19/zero-btc-screen.git ~/zero-btc-screen
     ```
 5. Run it
     ```
