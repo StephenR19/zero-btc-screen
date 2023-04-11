@@ -2,9 +2,10 @@
 
 All credits go to dr-mod/zero-btc-screen
 
-This version uses CoinGecko api specifically /coins/{id}/ohlc - set to Constellation DAG
+This version uses CoinGecko api specifically /coins/{id}/ohlc - current set to display a list of crypto 
 
-To configure change currency_id(constellation-labs*), vs_currency(usd*) and days(1*) in configuration.cfg
+To configure `currency_id`(bitcoin,ethereum,cardano...\*), `vs_currency`(gbp\*) and `days`(1\*) in configuration.cfg
+- `currency_id` can be a list that will be cycled through. This list should be aligned with `currency`
 
 Find CoinGecko api info here https://www.coingecko.com/en/api/documentation with currency_id at /coins/list and vs_currency at /simple/supported_vs_currencies
 
