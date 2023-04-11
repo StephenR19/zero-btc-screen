@@ -22,13 +22,11 @@ def get_dummy_data():
 
 def fetch_prices():
     logger.info('Fetching prices')
-    url = f'https://api.coingecko.com/api/v3/coins/{config.currency_id[SELECTED_COIN]}/ohlc?vs_currency={config.vs_currency[SELECTED_COIN]}&days={config.graph_days}'
-    print(url)
+    url = f'https://api.coingecko.com/api/v3/coins/{config.currency_id[SELECTED_COIN]}/ohlc?vs_currency={config.vs_currency}&days={config.graph_days}'
     req = Request(url)
     data = urlopen(req).read()
     external_data = json.loads(data)
     prices = [entry[1:] for entry in external_data[:]]
-    print(prices)
     return prices
 
 
