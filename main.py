@@ -20,9 +20,9 @@ def get_dummy_data():
 
 
 
-def fetch_prices():
+def fetch_prices(coin):
     logger.info('Fetching prices')
-    url = f'https://api.coingecko.com/api/v3/coins/{config.currency_id[selected_coin]}/ohlc?vs_currency={config.vs_currency}&days={config.graph_days}'
+    url = f'https://api.coingecko.com/api/v3/coins/{coin}/ohlc?vs_currency={config.vs_currency}&days={config.graph_days}'
     req = Request(url)
     data = urlopen(req).read()
     external_data = json.loads(data)
@@ -40,9 +40,9 @@ def main():
     try:
         while True:
             try:
-                prices = [entry[1:] for entry in get_dummy_data()] if config.dummy_data else fetch_prices()
-                data_sink.update_observers(prices)
-                if (len(config.currency_id)-1 > selected_coin):
+                prices = [entry[1:] for entry in get_dummy_data()] if config.dummy_data else fetch_prices(config.coins[selected_coin].split(':')[0])
+                data_sink.update_observers(config.coins[selected_coin].split(':')[1], prices)
+                if (len(config.coins)-1 > selected_coin):
                     selected_coin += 1
                 else:
                     selected_coin = 0
