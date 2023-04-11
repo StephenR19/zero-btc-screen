@@ -25,8 +25,8 @@ def fetch_prices():
     req = Request(url)
     data = urlopen(req).read()
     external_data = json.loads(data)
-    prices = [entry[1:] for entry in external_data[::-1]]
-    return prices.reverse()
+    prices = [entry[1:] for entry in external_data[:]]
+    return prices
 
 
 def main():
