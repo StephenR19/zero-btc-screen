@@ -32,15 +32,10 @@ class Config:
     def refresh_interval(self):
         return self._conf.getint('base', 'refresh_interval_seconds', fallback=15)
 
-    @property
-    def currency(self):
-        currencies = self._conf.get('base', 'currency', fallback='BTC,ETH,ADA,DOT,ATOM,SOL,XCH,LINK,MATIC,AVAX,QNT,ADS,DAG,DIMO,HNT,AAVE,LTX')
-        return currencies.split(',')
-
 
     @property
     def coins(self):
-        coins_list = self._conf.get('base', 'currency_id', fallback='bitcoin:BTC,ethereum:ETH,cardano:ADA,polkadot:DOT,cosmos:ATOM,solana:SOL,chia:XCH,chainlink:LINK,matic-network:MATIC,avalanche-2:AVAX,quant-network:QNT,alkimi:ADS,constellation-labs:DAG,dimo:DIMO,helium:HNT,aave:AAVE,lattice-token:LTX')
+        coins_list = self._conf.get('base', 'coins', fallback='bitcoin:BTC,ethereum:ETH,cardano:ADA,polkadot:DOT,cosmos:ATOM,solana:SOL,chia:XCH,chainlink:LINK,matic-network:MATIC,avalanche-2:AVAX,quant-network:QNT,alkimi:ADS,constellation-labs:DAG,dimo:DIMO,helium:HNT,aave:AAVE,lattice-token:LTX,curve-dao-token:CRV,enjincoin:ENJ,uniswap:UNI,the-graph:GRT,zelcash:FLUX,fantom:FTM,thorchain:RUNE,the-sandbox:SAND,arweave:AR,axelar:AXL,livepeer:LPT,mapmetrics:MMAPS,algorand:ALGO,planetwatch:PLANETS,rss3:RSS3,siaprime-coin:SCP,banano:BAN,derace:DERC')
         return coins_list.split(',')
 
     @property
