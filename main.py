@@ -32,7 +32,7 @@ def fetch_prices():
 
 def main():
     logger.info('Initialize')
-
+    global SELECTED_COIN
     data_sink = Observable()
     builder = Builder(config)
     builder.bind(data_sink)
