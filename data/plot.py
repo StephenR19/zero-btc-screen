@@ -53,7 +53,7 @@ class Plot:
     @staticmethod
     def caption(price, y, screen_width, font, draw, fill=None, currency_offset=-1, price_offset=60):
         global selected_coin
-        if (len(config.currency_id)-1 >= selected_coin):
+        if (len(config.currency_id)-1 > selected_coin):
             selected_coin += 1
         else:
             selected_coin = 0
