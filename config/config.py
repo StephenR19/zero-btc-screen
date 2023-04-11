@@ -34,7 +34,7 @@ class Config:
 
     @property
     def currency(self):
-        currencies = self._conf.get('base', 'currency', fallback='BTC,ETH,ADA,DOT,ATO,SOL,XCH,LINK,MAT,AVA,QNT,ADS,DAG,DIMO,HNT,AVE,LTX')
+        currencies = self._conf.get('base', 'currency', fallback='BTC,ETH,ADA,DOT,ATOM,SOL,XCH,LINK,MATIC,AVAX,QNT,ADS,DAG,DIMO,HNT,AAVE,LTX')
         return currencies.split(',')
 
 
