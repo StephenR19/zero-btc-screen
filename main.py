@@ -40,11 +40,11 @@ def main():
     try:
         while True:
             try:
-                prices = [entry[1:] for entry in get_dummy_data()] if config.dummy_data else fetch_prices()
-                if (len(config.currency_id) >= selected_coin):
+                if (len(config.currency_id) >= selected_coin -1):
                     selected_coin += 1
                 else:
                     selected_coin = 0
+                prices = [entry[1:] for entry in get_dummy_data()] if config.dummy_data else fetch_prices()
                 data_sink.update_observers(prices)
                 time.sleep(config.refresh_interval)
             except (HTTPError, URLError) as e:
