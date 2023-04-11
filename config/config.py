@@ -34,11 +34,14 @@ class Config:
 
     @property
     def currency(self):
-        return self._conf.get('base', 'currency', fallback='DAG')
+        currencies = self._conf.get('base', 'currency', fallback='BTC,ETH,ADA,DOT,ATO,SOL,XCH,LINK,MAT,AVA,QNT,ADS,DAG,DIMO,HNT,AVE,LTX')
+        return currencies.split(',')
+
 
     @property
     def currency_id(self):
-        return self._conf.get('base', 'currency_id', fallback='constellation-labs')
+        currency_ids = self._conf.get('base', 'currency_id', fallback='bitcoin,ethereum,cardano,polkadot,cosmos,solana,chia,chainlink,matic-network,avalanche-2,quant-network,alkimi,constellation-labs,dimo,helium,lattice-token')
+        return currency_ids.split(',')
 
     @property
     def vs_currency(self):
