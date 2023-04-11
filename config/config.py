@@ -30,7 +30,7 @@ class Config:
 
     @property
     def refresh_interval(self):
-        return self._conf.getint('base', 'refresh_interval_minutes', fallback=15) * 60
+        return self._conf.getint('base', 'refresh_interval_seconds', fallback=15)
 
     @property
     def currency(self):
