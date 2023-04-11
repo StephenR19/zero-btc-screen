@@ -12,7 +12,7 @@ from presentation.observer import Observable
 
 DATA_SLICE_DAYS = 1
 DATETIME_FORMAT = "%Y-%m-%dT%H:%M"
-selected_coin = -1
+selected_coin = 0
 
 
 def get_dummy_data():
@@ -40,12 +40,12 @@ def main():
     try:
         while True:
             try:
+                prices = [entry[1:] for entry in get_dummy_data()] if config.dummy_data else fetch_prices()
+                data_sink.update_observers(prices)
                 if (len(config.currency_id)-1 > selected_coin):
                     selected_coin += 1
                 else:
                     selected_coin = 0
-                prices = [entry[1:] for entry in get_dummy_data()] if config.dummy_data else fetch_prices()
-                data_sink.update_observers(prices)
                 time.sleep(config.refresh_interval)
             except (HTTPError, URLError) as e:
                 logger.error(str(e))
