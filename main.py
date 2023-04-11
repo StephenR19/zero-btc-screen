@@ -31,6 +31,7 @@ def fetch_prices():
 
 
 def main():
+    global selected_coin
     logger.info('Initialize')
     data_sink = Observable()
     builder = Builder(config)

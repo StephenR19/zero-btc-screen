@@ -4,6 +4,7 @@ from config.config import config
 selected_coin = 0   
 
 class Plot:
+    global selected_coin
     @staticmethod
     def line(prices, size=(100, 100), position=(0, 0), draw=None, fill=None):
         assert draw
