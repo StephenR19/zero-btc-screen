@@ -12,6 +12,7 @@ from presentation.observer import Observable
 
 DATA_SLICE_DAYS = 1
 DATETIME_FORMAT = "%Y-%m-%dT%H:%M"
+selected_coin = 0
 
 
 def get_dummy_data():
@@ -21,7 +22,7 @@ def get_dummy_data():
 
 def fetch_prices():
     logger.info('Fetching prices')
-    url = f'https://api.coingecko.com/api/v3/coins/{config.currency_id}/ohlc?vs_currency={config.vs_currency}&days={config.graph_days}'
+    url = f'https://api.coingecko.com/api/v3/coins/{config.currency_id[selected_coin]}/ohlc?vs_currency={config.vs_currency}&days={config.graph_days}'
     req = Request(url)
     data = urlopen(req).read()
     external_data = json.loads(data)
@@ -30,8 +31,8 @@ def fetch_prices():
 
 
 def main():
+    global selected_coin
     logger.info('Initialize')
-
     data_sink = Observable()
     builder = Builder(config)
     builder.bind(data_sink)
@@ -40,6 +41,10 @@ def main():
         while True:
             try:
                 prices = [entry[1:] for entry in get_dummy_data()] if config.dummy_data else fetch_prices()
+                if (len(config.currency_id) >= selected_coin):
+                    selected_coin += 1
+                else:
+                    selected_coin = 0
                 data_sink.update_observers(prices)
                 time.sleep(config.refresh_interval)
             except (HTTPError, URLError) as e:
