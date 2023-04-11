@@ -42,7 +42,7 @@ def main():
             try:
                 prices = [entry[1:] for entry in get_dummy_data()] if config.dummy_data else fetch_prices(config.coins[selected_coin].split(':')[0])
                 data_sink.update_observers(config.coins[selected_coin].split(':')[1], prices)
-                if (len(config.currency_id)-1 > selected_coin):
+                if (len(config.coins)-1 > selected_coin):
                     selected_coin += 1
                 else:
                     selected_coin = 0
