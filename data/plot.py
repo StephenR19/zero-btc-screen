@@ -1,7 +1,7 @@
 import math
 from config.config import config
 
-selected_coin = 0   
+selected_coin = -1   
 
 class Plot:
     @staticmethod
@@ -53,7 +53,7 @@ class Plot:
     @staticmethod
     def caption(price, y, screen_width, font, draw, fill=None, currency_offset=-1, price_offset=60):
         global selected_coin
-        if (len(config.currency_id) >= selected_coin - 1):
+        if (len(config.currency_id) >= selected_coin):
             selected_coin += 1
         else:
             selected_coin = 0

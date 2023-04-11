@@ -12,7 +12,7 @@ from presentation.observer import Observable
 
 DATA_SLICE_DAYS = 1
 DATETIME_FORMAT = "%Y-%m-%dT%H:%M"
-selected_coin = 0
+selected_coin = -1
 
 
 def get_dummy_data():
@@ -40,7 +40,7 @@ def main():
     try:
         while True:
             try:
-                if (len(config.currency_id) >= selected_coin -1):
+                if (len(config.currency_id) >= selected_coin):
                     selected_coin += 1
                 else:
                     selected_coin = 0
