@@ -6,7 +6,7 @@ This version uses CoinGecko api specifically /coins/{id}/ohlc and it can cycle t
 
 To configure `currency_id`(bitcoin,ethereum,cardano...\*), `vs_currency`(gbp\*) and `days`(1\*) in configuration.cfg
 - `currency_id` can be a list that will be cycled through. This list should be aligned with `currency`
-- `refresh_interval_minutes` becomes the timer for how long each crypto in the list is shown for 
+- `refresh_interval_seconds` becomes the timer for how long each crypto in the list is shown for 
 
 Find CoinGecko api info here https://www.coingecko.com/en/api/documentation with currency_id at /coins/list and vs_currency at /simple/supported_vs_currencies
 
