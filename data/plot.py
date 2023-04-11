@@ -4,7 +4,6 @@ from config.config import config
 selected_coin = 0   
 
 class Plot:
-    global selected_coin
     @staticmethod
     def line(prices, size=(100, 100), position=(0, 0), draw=None, fill=None):
         assert draw
@@ -52,7 +51,8 @@ class Plot:
         return text_width
 
     @staticmethod
-    def caption(price, y, screen_width, font, draw, fill=None, currency_offset=-1, price_offset=60):   
+    def caption(price, y, screen_width, font, draw, fill=None, currency_offset=-1, price_offset=60):
+        global selected_coin   
         if (len(config.currency_id) >= selected_coin):
             selected_coin += 1
         else:
