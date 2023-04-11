@@ -1,6 +1,6 @@
 import math
 from config.config import config
-from main import SELECTED_COIN
+from shareddata import SELECTED_COIN
 
 class Plot:
     @staticmethod

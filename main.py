@@ -9,10 +9,10 @@ from config.builder import Builder
 from config.config import config
 from logs import logger
 from presentation.observer import Observable
+from data.shareddata import SELECTED_COIN
 
 DATA_SLICE_DAYS = 1
 DATETIME_FORMAT = "%Y-%m-%dT%H:%M"
-SELECTED_COIN = 0
 
 
 def get_dummy_data():
