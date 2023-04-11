@@ -1,6 +1,6 @@
 import math
 from config.config import config
-from data.shareddata import SELECTED_COIN
+import data.shareddata
 
 class Plot:
     @staticmethod
@@ -51,8 +51,9 @@ class Plot:
 
     @staticmethod
     def caption(price, y, screen_width, font, draw, fill=None, currency_offset=-1, price_offset=60):
-        global SELECTED_COIN
-        draw.text((currency_offset, y), config.currency[SELECTED_COIN][:3], font=font, fill=fill)
+        data.shareddata.init()
+        slected_coin = data.shareddata.SELECTED_COIN
+        draw.text((currency_offset, y), config.currency[slected_coin][:3], font=font, fill=fill)
         price_text = Plot.human_format(price, 8, 2)
         text_width, _ = draw.textsize(price_text, font)
         price_position = (((screen_width - text_width - price_offset) / 2) + price_offset, y)

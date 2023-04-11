@@ -9,10 +9,12 @@ from config.builder import Builder
 from config.config import config
 from logs import logger
 from presentation.observer import Observable
-from data.shareddata import SELECTED_COIN
+import data.shareddata
 
 DATA_SLICE_DAYS = 1
 DATETIME_FORMAT = "%Y-%m-%dT%H:%M"
+data.shareddata.init()
+slected_coin = data.shareddata.SELECTED_COIN
 
 
 def get_dummy_data():
@@ -22,7 +24,7 @@ def get_dummy_data():
 
 def fetch_prices():
     logger.info('Fetching prices')
-    url = f'https://api.coingecko.com/api/v3/coins/{config.currency_id[SELECTED_COIN]}/ohlc?vs_currency={config.vs_currency}&days={config.graph_days}'
+    url = f'https://api.coingecko.com/api/v3/coins/{config.currency_id[slected_coin]}/ohlc?vs_currency={config.vs_currency}&days={config.graph_days}'
     req = Request(url)
     data = urlopen(req).read()
     external_data = json.loads(data)
@@ -32,7 +34,6 @@ def fetch_prices():
 
 def main():
     logger.info('Initialize')
-    global SELECTED_COIN
     data_sink = Observable()
     builder = Builder(config)
     builder.bind(data_sink)
@@ -42,10 +43,10 @@ def main():
             try:
                 currency_length = len(config.currency_id)
                 prices = [entry[1:] for entry in get_dummy_data()] if config.dummy_data else fetch_prices()
-                if (currency_length > SELECTED_COIN):
-                    SELECTED_COIN += 1
+                if (currency_length > slected_coin):
+                    slected_coin += 1
                 else:
-                    SELECTED_COIN = 0
+                    slected_coin = 0
                 data_sink.update_observers(prices)
                 time.sleep(config.refresh_interval)
             except (HTTPError, URLError) as e:
