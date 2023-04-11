@@ -35,7 +35,7 @@ class Epd3in7(Observer):
         epd.Clear(0xFF, 1)
         return epd
 
-    def form_image(self, prices, screen_draw):
+    def form_image(self, coin, prices, screen_draw):
         screen_draw.rectangle((0, 0, SCREEN_WIDTH, SCREEN_HEIGHT), fill="#ffffff")
         if self.mode == "candle":
             Plot.candle(prices, size=(SCREEN_WIDTH - 45, SCREEN_HEIGHT - 27), position=(41, 0), draw=screen_draw)
@@ -50,13 +50,13 @@ class Epd3in7(Observer):
         screen_draw.line([(39, 4), (39, SCREEN_HEIGHT - 27)])
         screen_draw.line([(60, SCREEN_HEIGHT - 23), (60, SCREEN_HEIGHT - 1)])
         # screen_draw.text((-1, SCREEN_HEIGHT - 27), "XXX"[:3], font=FONT_LARGE, fill=None)
-        Plot.caption(flatten_prices[len(flatten_prices) - 1], SCREEN_HEIGHT - 27, SCREEN_WIDTH - 45, FONT_LARGE, screen_draw,
+        Plot.caption(coin, flatten_prices[len(flatten_prices) - 1], SCREEN_HEIGHT - 27, SCREEN_WIDTH - 45, FONT_LARGE, screen_draw,
                      price_offset=0)
         Plot.percentage(prices, SCREEN_WIDTH - 56, SCREEN_HEIGHT - 27, FONT_LARGE, screen_draw)
 
         screen_draw.line([(366, SCREEN_HEIGHT - 23), (366, SCREEN_HEIGHT - 1)])
 
-    def update(self, data):
+    def update(self, coin, data):
         self.form_image(data, self.screen_draw)
         screen_image_rotated = self.screen_image.rotate(180)
         self.epd.display_1Gray(self.epd.getbuffer(screen_image_rotated))

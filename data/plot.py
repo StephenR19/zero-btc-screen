@@ -1,8 +1,6 @@
 import math
 from config.config import config
 
-selected_coin = 0   
-
 class Plot:
     @staticmethod
     def line(prices, size=(100, 100), position=(0, 0), draw=None, fill=None):
@@ -51,18 +49,12 @@ class Plot:
         return text_width
 
     @staticmethod
-    def caption(price, y, screen_width, font, draw, fill=None, currency_offset=-1, price_offset=60):
-        global selected_coin
-        draw.text((currency_offset, y), config.currency[selected_coin][:3], font=font, fill=fill)
+    def caption(coin, price, y, screen_width, font, draw, fill=None, currency_offset=-1, price_offset=60):
+        draw.text((currency_offset, y), coin[:3], font=font, fill=fill)
         price_text = Plot.human_format(price, 8, 2)
         text_width, _ = draw.textsize(price_text, font)
         price_position = (((screen_width - text_width - price_offset) / 2) + price_offset, y)
         draw.text(price_position, price_text, font=font, fill=fill)
-        if (len(config.currency_id)-1 > selected_coin):
-            selected_coin += 1
-        else:
-            selected_coin = 0
-        
 
     @staticmethod
     def candle(data, size=(100, 100), position=(0, 0), draw=None, fill_neg="#000000", fill_pos=None):

@@ -32,7 +32,7 @@ class Epd2in7v1(Observer):
         epd.Clear(0xFF)
         return epd
 
-    def form_image(self, prices, screen_draw):
+    def form_image(self, coin, prices, screen_draw):
         screen_draw.rectangle((0, 0, SCREEN_WIDTH, SCREEN_HEIGHT), fill="#ffffff")
         screen_draw = self.screen_draw
         if self.mode == "candle":
@@ -45,10 +45,10 @@ class Epd2in7v1(Observer):
         Plot.y_axis_labels(flatten_prices, FONT_SMALL, (2, 8), (38, 112), draw=screen_draw)
         screen_draw.line([(9, 130), (255, 130)])
         screen_draw.line([(41, 4), (41, 126)])
-        Plot.caption(flatten_prices[len(flatten_prices) - 1], 139, SCREEN_WIDTH, FONT_LARGE, screen_draw, None, 12, 64)
+        Plot.caption(coin, flatten_prices[len(flatten_prices) - 1], 139, SCREEN_WIDTH, FONT_LARGE, screen_draw, None, 12, 64)
 
-    def update(self, data):
-        self.form_image(data, self.screen_draw)
+    def update(self, coin, data):
+        self.form_image(coin, data, self.screen_draw)
         screen_image_rotated = self.screen_image.rotate(180)
         self.epd.display(self.epd.getbuffer(screen_image_rotated))
 
