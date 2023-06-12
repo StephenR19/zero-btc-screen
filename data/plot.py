@@ -50,7 +50,7 @@ class Plot:
 
     @staticmethod
     def caption(coin, price, y, screen_width, font, draw, fill=None, currency_offset=-1, price_offset=60):
-        draw.text((currency_offset, y), coin[:3], font=font, fill=fill)
+        draw.text((currency_offset, y), coin[:4], font=font, fill=fill)
         price_text = Plot.human_format(price, 8, 2)
         text_width, _ = draw.textsize(price_text, font)
         price_position = (((screen_width - text_width - price_offset) / 2) + price_offset, y)

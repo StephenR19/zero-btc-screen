@@ -14,7 +14,7 @@ SCREEN_WIDTH = 264
 FONT_SMALL = ImageFont.truetype(
     os.path.join(os.path.dirname(__file__), os.pardir, 'Roses.ttf'), 10)
 FONT_LARGE = ImageFont.truetype(
-    os.path.join(os.path.dirname(__file__), os.pardir, 'PixelSplitter-Bold.ttf'), 27)
+    os.path.join(os.path.dirname(__file__), os.pardir, 'PixelSplitter-Bold.ttf'), 22)
 
 class Epd2in7v1(Observer):
 
@@ -45,7 +45,8 @@ class Epd2in7v1(Observer):
         Plot.y_axis_labels(flatten_prices, FONT_SMALL, (2, 8), (38, 112), draw=screen_draw)
         screen_draw.line([(9, 130), (255, 130)])
         screen_draw.line([(41, 4), (41, 126)])
-        Plot.caption(coin, flatten_prices[len(flatten_prices) - 1], 139, SCREEN_WIDTH, FONT_LARGE, screen_draw, None, 12, 64)
+        Plot.caption(coin, flatten_prices[len(flatten_prices) - 1], 139, SCREEN_WIDTH, FONT_LARGE, screen_draw, price_offset=0)
+        Plot.percentage(prices, SCREEN_WIDTH - 56, SCREEN_HEIGHT - 27, FONT_LARGE, screen_draw)
 
     def update(self, coin, data):
         self.form_image(coin, data, self.screen_draw)
