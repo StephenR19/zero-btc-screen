@@ -1,5 +1,4 @@
 import json
-import random
 import time
 from datetime import datetime, timezone, timedelta
 from urllib.error import HTTPError, URLError
