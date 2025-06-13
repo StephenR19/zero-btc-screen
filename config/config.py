@@ -44,7 +44,11 @@ class Config:
 
     @property
     def graph_days(self):
-        return self._conf.get('base', 'graph_days', fallback='1')          
+        return self._conf.get('base', 'graph_days', fallback='1')
+    
+    @property
+    def api_key(self):
+        return self._conf.get('base', 'api_key', fallback='')          
 
     @staticmethod
     def _load_screens(file_name):

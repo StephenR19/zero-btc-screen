@@ -27,8 +27,8 @@ def fetch_prices(coin):
     logger.info(f'Fetching prices for {coin}')
     
     # Check if the api_key is present and not empty in the config
-    if not hasattr(config, 'api_key') or not config.api_key:
-        logger.error("API key is missing from the configuration file.")
+    if not config.api_key or 'YOUR_API_KEY_HERE' in config.api_key:
+        logger.error("API key is missing or not set in configuration.cfg. Please add 'api_key = YOUR_KEY' to the [base] section.")
         return []
 
     url = f'https://api.coingecko.com/api/v3/coins/{coin}/ohlc?vs_currency={config.vs_currency}&days={config.graph_days}'
