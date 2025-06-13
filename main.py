@@ -21,12 +21,29 @@ def get_dummy_data():
 
 
 def fetch_prices(coin):
-    logger.info('Fetching prices')
+    """
+    Fetches price data from CoinGecko API using an API key from the config.
+    """
+    logger.info(f'Fetching prices for {coin}')
+    
+    # Check if the api_key is present and not empty in the config
+    if not hasattr(config, 'api_key') or not config.api_key:
+        logger.error("API key is missing from the configuration file.")
+        return []
+
     url = f'https://api.coingecko.com/api/v3/coins/{coin}/ohlc?vs_currency={config.vs_currency}&days={config.graph_days}'
-    req = Request(url)
+    
+    # Note: Use 'x-cg-pro-api-key' if you have a paid Pro plan
+    headers = {
+        'x-cg-demo-api-key': config.api_key
+    }
+    
+    req = Request(url, headers=headers)
+    
     data = urlopen(req).read()
     external_data = json.loads(data)
     prices = [entry[1:] for entry in external_data[:]]
+    
     return prices
 
 
