@@ -2,7 +2,7 @@ import os
 
 from PIL import Image, ImageDraw, ImageFont
 try:
-    from waveshare_epd import epd2in13_v2
+    from waveshare_epd import epd2in13_V2
 except ImportError:
     pass
 from data.plot import Plot
@@ -27,7 +27,7 @@ class Epd2in13v2(Observer):
 
     @staticmethod
     def _init_display():
-        epd = epd2in13_v2.EPD()
+        epd = epd2in13_V2.EPD()
         epd.init(epd.FULL_UPDATE)
         epd.Clear(0xFF)
         epd.init(epd.PART_UPDATE)
