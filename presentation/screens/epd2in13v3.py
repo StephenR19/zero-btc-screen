@@ -1,9 +1,5 @@
 from presentation.screens.epd2in13v2 import Epd2in13v2
-
-try:
-    from waveshare_epd import epd2in13_V3
-except ImportError:
-    pass
+from waveshare_epd import epd2in13_V3
 
 
 class Epd2in13v3(Epd2in13v2):

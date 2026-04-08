@@ -1,7 +1,5 @@
 # --Forked Version Changes--
 
-All credits go to dr-mod/zero-btc-screen
-
 This version uses CoinGecko api specifically /coins/{id}/ohlc and it can cycle through a list of crypto
 
 To configure `coins`(bitcoin:BTC,ethereum:ETH,cardano:ADA...\*), `vs_currency`(gbp\*) and `days`(1\*) in configuration.cfg
@@ -43,32 +41,33 @@ Bitcoin (or any other currency) stock price for your RPi Zero
 1. Turn on SPI via `sudo raspi-config`
     ```
     Interfacing Options -> SPI
-   ```
-2. Install dependencies
     ```
-    sudo apt update
-    sudo apt-get install python3-pip python3-pil python3-numpy git
-    pip3 install RPi.GPIO spidev
-    ```
-
-3. Install drivers for your display (you don't need to install both)
-    1. If you have a Waveshare display
-    ```
-    git clone https://github.com/waveshare/e-Paper.git ~/e-Paper
-    pip3 install ~/e-Paper/RaspberryPi_JetsonNano/python/
-    ```
-    2. If you have an Inky wHAT display
-    ```
-    pip3 install inky[rpi]
-    ```
-4. Download Zero BTC Screen
+2. Download Zero BTC Screen
     ```
     git clone https://github.com/StephenR19/zero-btc-screen.git ~/zero-btc-screen
+    cd ~/zero-btc-screen
     ```
-5. Run it
+3. Create and activate venv
     ```
-    python3 ~/zero-btc-screen/main.py
+    python3 -m venv venv --system-site-packages
+    source venv/bin/activate
     ```
+4. Install dependencies
+    ```
+    pip install rpi-lgpio spidev Pillow numpy
+    ```
+5. Install drivers for your display
+    - Waveshare: `git clone https://github.com/waveshare/e-Paper.git ~/e-Paper && pip install ~/e-Paper/RaspberryPi_JetsonNano/python/`
+    - Inky: `pip install inky[rpi]`
+6. **Important**: Add CoinGecko API key to `configuration.cfg` under `[base]`:
+    ```
+    api_key = YOUR_API_KEY_HERE
+    ```
+7. Test it
+    ```
+    python main.py
+    ```
+8. Set up systemd service (see Autostart section)
 
 
 ## Screen configuration
@@ -148,7 +147,7 @@ To make it run on startup you can choose from 2 options:
         After=network.target
  
         [Service]
-        ExecStart=/usr/bin/python3 -u main.py
+        ExecStart=/home/pi/zero-btc-screen/venv/bin/python -u /home/pi/zero-btc-screen/main.py
         WorkingDirectory=/home/pi/zero-btc-screen
         StandardOutput=inherit
         StandardError=inherit
@@ -172,8 +171,3 @@ To make it run on startup you can choose from 2 options:
        ```
         sudo journalctl -f -u btc-screen.service
        ```
-
-### Support the project
-If you would like to support this project and and keep me caffeinated, you can do it here:
-
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/drmod)

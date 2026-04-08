@@ -1,10 +1,7 @@
 import os
 
 from PIL import Image, ImageDraw, ImageFont
-try:
-    from waveshare_epd import epd3in7
-except ImportError:
-    pass
+from waveshare_epd import epd3in7
 from data.plot import Plot
 from presentation.observer import Observer
 

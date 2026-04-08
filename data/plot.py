@@ -19,7 +19,7 @@ class Plot:
     def y_axis_labels(prices, font, position_first=(0, 0), position_last=(0, 0), draw=None, fill=None, labels_number=3):
         def center_x(price):
             area_width = position_last[0] - position_first[0]
-            text_width, _ = draw.textsize(price, font)
+            text_width = int(draw.textlength(price, font=font))
             if area_width >= text_width:
                 return position_first[0] + (area_width - text_width) / 2
             else:
@@ -43,7 +43,7 @@ class Plot:
         price_text = price_text + "%"
         if percentage > 0:
             price_text = "+" + price_text
-        text_width, _ = draw.textsize(price_text, font)
+        text_width = int(draw.textlength(price_text, font=font))
         price_position = ((x_middle - (text_width / 2)), y)
         draw.text(price_position, price_text, font=font, fill=fill)
         return text_width
@@ -52,7 +52,7 @@ class Plot:
     def caption(coin, price, y, screen_width, font, draw, fill=None, currency_offset=-1, price_offset=60):
         draw.text((currency_offset, y), coin[:4], font=font, fill=fill)
         price_text = Plot.human_format(price, 8, 2)
-        text_width, _ = draw.textsize(price_text, font)
+        text_width = int(draw.textlength(price_text, font=font))
         price_position = (((screen_width - text_width - price_offset) / 2) + price_offset, y)
         draw.text(price_position, price_text, font=font, fill=fill)
 
@@ -67,6 +67,8 @@ class Plot:
         num_of_candles = width // (candle_width + space)
         leftover_space = width % (candle_width + space)
         windows_per_candle = len(data) // num_of_candles
+        if windows_per_candle == 0:
+            windows_per_candle = 1
         data_offset = len(data) % num_of_candles
         candle_data = []
         for i in range(data_offset, len(data), windows_per_candle):
@@ -110,9 +112,9 @@ class Plot:
                 draw.line([x, open_y, x + candle_width - 1, close_y], fill=fill_pos)
             else:
                 if open < close:
-                    draw.rectangle([x, open_y, x + candle_width - 1, close_y], fill=fill_pos)
+                    draw.rectangle([x, min(open_y, close_y), x + candle_width - 1, max(open_y, close_y)], fill=fill_pos)
                 else:
-                    draw.rectangle([x, open_y, x + candle_width - 1, close_y], fill=fill_neg)
+                    draw.rectangle([x, min(open_y, close_y), x + candle_width - 1, max(open_y, close_y)], fill=fill_neg)
 
     # TODO: Adapt for big numbers 1k, 1m, etc
     @staticmethod
