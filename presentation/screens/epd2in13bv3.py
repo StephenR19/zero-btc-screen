@@ -2,7 +2,7 @@ import os
 
 from PIL import Image, ImageDraw, ImageFont
 try:
-    from waveshare_epd import epd2in13b_V3
+    from waveshare_epd import epd2in13b_v3
 except ImportError:
     pass
 from data.plot import Plot
@@ -20,7 +20,7 @@ class Epd2in13bv3(Observer):
 
     def __init__(self, observable, mode):
         super().__init__(observable=observable)
-        self.epd = epd2in13b_V3.EPD()
+        self.epd = epd2in13b_v3.EPD()
 
         self.epd.init()
         self.image_black = Image.new('1', (SCREEN_WIDTH, SCREEN_HEIGHT), 255)
