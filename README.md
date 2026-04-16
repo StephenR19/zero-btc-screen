@@ -53,9 +53,26 @@ Bitcoin (or any other currency) stock price for your RPi Zero
     source venv/bin/activate
     ```
 4. Install dependencies
-    ```
-    pip install rpi-lgpio spidev Pillow numpy
-    ```
+
+   **Option A: venv + pip install (recommended)**
+   ```
+   python3 -m venv venv --system-site-packages
+   source venv/bin/activate
+   pip install -r requirements.txt
+   ```
+
+   **Option B: apt install (system packages), then venv**
+   ```
+   sudo apt install python3-lgpio python3-spidev python3-pil python3-numpy
+   python3 -m venv venv --system-site-packages
+   source venv/bin/activate
+   ```
+
+   Note: On RPi OS Bookworm/Trixie, you may need to remove the old RPi.GPIO first:
+   ```
+   sudo apt remove python3-rpi.gpio
+   ```
+
 5. Install drivers for your display
     - Waveshare: `git clone https://github.com/waveshare/e-Paper.git ~/e-Paper && pip install ~/e-Paper/RaspberryPi_JetsonNano/python/`
     - Inky: `pip install inky[rpi]`
